@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Coba VueJS</title>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+  <div id="app">
+    {{message}}
+    <span v-if="seen">Now You See Me!</span>
+    <button v-on:click="see()">See</button>
+    <ol>
+      <li v-for="todo,index in todos">
+          {{todo.text}}
+          <span v-bind:id="todo_id+index"></span>
+      </li>
+    </ol>
+
+    <transition name="custom-classes-transition"
+   enter-active-class="animated tada"
+   leave-active-class="animated bounceOutRight">
+   <p v-if="show">hello</p>
+ </transition>
+   <button @click="show = !show">
+    Toggle render
+  </button>
+  </div>
+</body>
+<script>
+  // Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="_token"]').attr('content');
+  var body = new Vue({
+    el:"#app",
+    data:{
+      message:"Hello Vue!",
+      seen:true,
+      todo_id:"todo",
+      todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ],
+    show: true,
+    },
+    methods:{
+      see:function(){
+        this.seen = this.seen ? false:true;
+      }
+    }
+  });
+</script>
+</html>
